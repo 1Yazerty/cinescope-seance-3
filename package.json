@@ -1,0 +1,30 @@
+{
+  "name": "cinescope-seance-3-etudiants",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "5.9.3",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "latest",
+    "@testing-library/react": "latest",
+    "@types/jest-axe": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "jest-axe": "latest",
+    "jsdom": "latest",
+    "vitest": "latest",
+    "@testing-library/user-event": "14.6.1"
+  }
+}

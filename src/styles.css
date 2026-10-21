@@ -1,0 +1,385 @@
+:root {
+    font-family: Inter, system-ui, sans-serif;
+    color: #202536;
+    background: #f4f2ee;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+:focus-visible {
+    outline: 3px solid #ffbf47;
+    outline-offset: 3px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem max(1.25rem, calc((100% - 70rem) / 2));
+    background: #16192a;
+    color: white;
+}
+
+.brand {
+    color: white;
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    gap: 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.menu a {
+    color: #f3f3fa;
+}
+
+.page {
+    width: min(70rem, calc(100% - 2.5rem));
+    margin: 2.5rem auto;
+}
+
+.intro {
+    color: #555b6d;
+}
+
+.search-field {
+    display: grid;
+    width: min(28rem, 100%);
+    gap: .4rem;
+    margin: 1rem 0 2rem;
+}
+
+.search-field label {
+    font-weight: 700;
+}
+
+.search {
+    width: 100%;
+    padding: .8rem 1rem;
+    border: 1px solid #777d8c;
+    border-radius: .5rem;
+}
+
+.film-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1.25rem;
+}
+
+.film-card {
+    overflow: hidden;
+    border-radius: .8rem;
+    background: white;
+    box-shadow: 0 4px 18px #23263a1c;
+}
+
+.film-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+}
+
+.film-content {
+    padding: 1rem;
+}
+
+.film-content h3 {
+    margin: .5rem 0 .35rem;
+    font-size: 1.15rem;
+}
+
+.film-content>p:not(.availability) {
+    margin: 0;
+    color: #555b66;
+}
+
+.availability {
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    margin: 0;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.availability::before {
+    content: "";
+    width: .7rem;
+    height: .7rem;
+    border-radius: 50%;
+}
+
+.available {
+    color: #176b38;
+}
+
+.available::before {
+    background: #25894a;
+}
+
+.unavailable {
+    color: #a22424;
+}
+
+.unavailable::before {
+    background: #c93535;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+.booking-trigger {
+    flex: 1;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: .65rem .8rem;
+    border: 0;
+    border-radius: .4rem;
+    background: #252d61;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.favorite {
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    border: 1px solid #777d8c;
+    border-radius: .4rem;
+    background: white;
+    color: #795700;
+    font-size: 1.45rem;
+    cursor: pointer;
+}
+
+.selection {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #e1e7ff;
+    border-radius: .5rem;
+}
+
+.infos {
+    margin-top: 3rem;
+}
+
+@media (max-width: 34rem) {
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Même présentation dans les deux versions, comportements à corriger en TP. */
+dialog,
+.modal {
+    width: min(36rem, calc(100% - 2rem));
+    max-height: 90vh;
+    overflow: auto;
+    padding: 1.5rem;
+    border: 0;
+    border-radius: .8rem;
+    color: inherit;
+    background: white;
+    box-shadow: 0 16px 60px #11182755;
+}
+
+dialog::backdrop {
+    background: #111827b8;
+}
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    background: #111827b8;
+}
+
+.dialog-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.dialog-heading h2 {
+    margin: 0 0 1rem;
+    line-height: 1.25;
+}
+
+.close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: .3rem .7rem;
+    border: 0;
+    border-radius: .4rem;
+    background: #252d61;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.dialog-action {
+    min-height: 2.75rem;
+    margin-top: .5rem;
+    padding: .7rem 1rem;
+    border: 0;
+    border-radius: .4rem;
+    background: #252d61;
+    color: white;
+    cursor: pointer;
+}
+
+/* Bonus : même identité graphique ; confirmation visible sans dépendre de la couleur. */
+.dialog-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+}
+
+.dialog-secondary {
+    border: 1px solid #777d8c;
+    background: white;
+    color: #252d61;
+}
+
+.booking-confirmation {
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+    border: 2px solid #176b38;
+    border-radius: .6rem;
+    background: #edf7ef;
+    color: #174b2a;
+    line-height: 1.5;
+}
+
+/* Séance 3 : formulaire, mêmes styles dans les deux versions. */
+.field {
+    display: grid;
+    gap: .4rem;
+    margin: 1.2rem 0;
+}
+
+.field label,
+.field-label,
+legend {
+    font-weight: 700;
+}
+
+.field-label {
+    margin: 0;
+}
+
+.field input {
+    min-width: 0;
+    width: 100%;
+    padding: .7rem;
+    border: 1px solid #777d8c;
+    border-radius: .4rem;
+}
+
+fieldset,
+.form-group {
+    margin: 1rem 0;
+    padding: .9rem;
+    border: 1px solid #777d8c;
+    border-radius: .4rem;
+    min-width: 0;
+}
+
+.field-help {
+    margin: .25rem 0;
+    color: #50586a;
+    font-size: .95rem;
+}
+
+.radio-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: .6rem 0;
+}
+
+.radio-options label,
+.radio-options span {
+    display: inline-flex;
+    gap: .5rem;
+    align-items: center;
+    padding: .35rem;
+}
+
+.radio-options input {
+    accent-color: #252d61;
+}
+
+.field-error {
+    color: #8e1d25;
+    font-weight: 700;
+    margin: .35rem 0;
+}
+
+input[aria-invalid="true"],
+input.invalid {
+    border: 2px solid #8e1d25;
+}
+
+.error-summary {
+    border: 2px solid #8e1d25;
+    border-radius: .4rem;
+    background: #fff3f2;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.error-summary h3 {
+    margin-top: 0;
+}
+
+.error-summary a {
+    color: #7c1420;
+}
+
+.demo-note {
+    color: #50586a;
+    font-size: .95rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
