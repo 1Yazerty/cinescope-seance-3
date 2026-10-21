@@ -11,6 +11,7 @@ type BookingDialogProps = {
 export default function BookingDialog({ film, onConfirm, onClose }: BookingDialogProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
   const confirmedRef = useRef(false);
   const prefix = useId();
   const id = (part: string) => `${prefix}-${part}`;
@@ -31,7 +32,10 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
     if (!film.available || confirmedRef.current) return;
     const result = readReservation(event.currentTarget);
     setErrors(result.errors);
-    if (Object.keys(result.errors).length > 0) return;
+    if (Object.keys(result.errors).length > 0) {
+      setTimeout(() => errorSummaryRef.current?.focus(), 0);
+      return;
+    }
     confirmedRef.current = true;
     onConfirm(film, result.values);
     closeBooking();
@@ -51,7 +55,59 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
         <>
           <p>Une place par réservation. Tous les champs du formulaire sont obligatoires.</p>
           <p className="demo-note">Démonstration : aucun billet réel ni envoi de courriel.</p>
-          {Object.keys(errors).length > 0 && <p className="field-error">Certains champs sont incorrects.</p>}
+          {Object.keys(errors).length > 0 && (
+            <div
+              className="error-summary"
+              ref={errorSummaryRef}
+              tabIndex={-1}
+              role="alert"
+              aria-labelledby={id("error-summary-title")}
+            >
+              <h3 id={id("error-summary-title")}>
+                {Object.keys(errors).length} {Object.keys(errors).length > 1 ? "erreurs empêchent" : "erreur empêche"} la réservation
+              </h3>
+              {errors.tariff && (
+                <p>
+                  <a
+                    href={`#${id("tariff-standard")}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(id("tariff-standard"))?.focus();
+                    }}
+                  >
+                    Choisissez un type de place.
+                  </a>
+                </p>
+              )}
+              {errors.name && (
+                <p>
+                  <a
+                    href={`#${id("name")}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(id("name"))?.focus();
+                    }}
+                  >
+                    Indiquez le nom de réservation.
+                  </a>
+                </p>
+              )}
+              {errors.email && (
+                <p>
+                  <a
+                    href={`#${id("email")}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(id("email"))?.focus();
+                    }}
+                  >
+                    Vérifiez l’adresse électronique.
+                  </a>
+                </p>
+              )}
+            </div>
+          )}
+
           <form noValidate onSubmit={submit}>
             <div className="form-group">
               <p className="field-label">Type de place</p>
