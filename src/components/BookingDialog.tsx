@@ -62,14 +62,39 @@ export default function BookingDialog({ film, onConfirm, onClose }: BookingDialo
               </div>
             </div>
             <div className="field">
-              <p className="field-label">Nom de réservation</p>
+              <label className="field-label" htmlFor={id("name")}>Nom de réservation</label>
               <p className="field-help" id={id("name-help")}>Indiquez le nom de la personne qui réserve.</p>
-              <input id={id("name")} name="name" placeholder="Votre nom" className={errors.name ? "invalid" : undefined} />
+              {errors.name && (
+                <p className="field-error" id={id("name-error")}>
+                  {errors.name}
+                </p>
+              )}
+              <input
+                id={id("name")}
+                name="name"
+                placeholder="Votre nom"
+                className={errors.name ? "invalid" : undefined}
+                aria-invalid={errors.name ? true : undefined}
+                aria-describedby={[id("name-help"), errors.name ? id("name-error") : undefined].filter(Boolean).join(" ") || undefined}
+              />
             </div>
             <div className="field">
-              <p className="field-label">Adresse électronique</p>
+              <label className="field-label" htmlFor={id("email")}>Adresse électronique</label>
               <p className="field-help" id={id("email-help")}>Format attendu : nom@exemple.fr.</p>
-              <input id={id("email")} name="email" type="email" placeholder="Votre adresse" className={errors.email ? "invalid" : undefined} />
+              {errors.email && (
+                <p className="field-error" id={id("email-error")}>
+                  {errors.email}
+                </p>
+              )}
+              <input
+                id={id("email")}
+                name="email"
+                type="email"
+                placeholder="Votre adresse"
+                className={errors.email ? "invalid" : undefined}
+                aria-invalid={errors.email ? true : undefined}
+                aria-describedby={[id("email-help"), errors.email ? id("email-error") : undefined].filter(Boolean).join(" ") || undefined}
+              />
             </div>
             <div className="dialog-actions">
               <button className="dialog-action" type="submit">Confirmer la réservation</button>
